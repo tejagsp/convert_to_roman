@@ -1,4 +1,50 @@
 <!DOCTYPE html>
+<script>
+  let eventSource;
+
+  function convertToRoman() {
+    // when "Start" button pressed
+    if (!window.EventSource) {
+      // IE or an old browser
+      alert("The browser doesn't support EventSource.");
+      return;
+    }
+
+    numberInput = document.getElementById('numberInput').value;
+    eventSource = new EventSource("convert_to_roman?num=" + numberInput);
+
+    eventSource.onopen = function (e) {
+      log("Event: open");
+    };
+
+    eventSource.onerror = function (e) {
+      stop();
+      log("Event: error");
+      if (this.readyState == EventSource.CONNECTING) {
+        log(`Reconnecting (readyState=${this.readyState})...`);
+      } else {
+        log("Error has occured.");
+      }
+    };
+
+    eventSource.onmessage = function (e) {
+      log("Event: message, data: " + e.data);
+      romanOutput.value = e.data;
+    };
+  }
+
+  function stop() {
+    // when "Stop" button pressed
+    eventSource.close();
+    log("eventSource.close()");
+  }
+
+  function log(msg) {
+    console.log(msg);
+    document.documentElement.scrollTop = 99999999;
+  }
+</script>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -14,13 +60,11 @@
             <h1>Number</h1>
             <input type="number" id="numberInput">
         </div>
-        <a id="convert" href="#">Convert</a>
+        <button onclick="convertToRoman()" id="convert">Convert</button>
         <div class="romans">
             <h1>Romans</h1>
             <input type="text" id="romanOutput">
         </div>
     </div>
-    <script type="text/javascript" src="numToRoman.js">
-    </script>
   </body>
 </html>
