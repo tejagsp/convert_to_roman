@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+html{
+    background-color: rgb(85, 211, 205);
+}
+.container{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.numbers{
+    border: 1px solid red;
+    padding: 20px;
+    margin: 40px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+ .numbers #numberInput{
+    height: 40px;
+    font-size: large;
+}
+
+.romans{
+    border: 1px solid red;
+    padding: 20px;
+    margin: 40px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.romans #romanOutput{
+    height: 40px;
+    font-size: large;
+}
+a{
+    text-decoration: none;
+    align-items: center;
+    border: 1px solid palegoldenrod;
+    margin: 40px;
+    padding: 20px;
+    align-items: center;
+    align-content: center;
+    font-size: 30px;
+    color: red;
+    font-weight: 800;
+}
